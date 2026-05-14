@@ -37,4 +37,18 @@ public class EmployeeConroller {
         return ResponseEntity.ok(employees);
     }
 
+    // build update employee methode REST API
+    @PutMapping("{id}")
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId,@RequestBody EmployeeDto employeeDto) {
+      EmployeeDto employee =employeeService.updateEmployee(employeeId, employeeDto);
+        return ResponseEntity.ok(employee);
+    }
+
+    // Build Delete Employee REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteEmployee (@PathVariable("id") Long employeeId){
+        employeeService.deleteEmployee (employeeId);
+        return ResponseEntity.ok("Employee deleted successfully!.");
+    }
+
 }
