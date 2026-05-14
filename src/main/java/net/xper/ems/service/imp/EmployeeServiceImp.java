@@ -9,6 +9,9 @@ import net.xper.ems.repository.EmployeeRepository;
 import net.xper.ems.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class EmployeeServiceImp implements EmployeeService {
@@ -32,5 +35,11 @@ public class EmployeeServiceImp implements EmployeeService {
         return EmployeeMapper.mapToEmployeeDto(employee);
     }
 
+    @Override
+    public List<EmployeeDto> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        return employees.stream().map((employee)->EmployeeMapper.mapToEmployeeDto(employee))
+                .collect(Collectors.toList());
+    }
 
 }
